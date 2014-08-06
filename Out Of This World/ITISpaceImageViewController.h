@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ITISpaceObject.h"
 
 @interface ITISpaceImageViewController : UIViewController <UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrView;
 @property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) ITISpaceObject *spaceObject;
 
 @end

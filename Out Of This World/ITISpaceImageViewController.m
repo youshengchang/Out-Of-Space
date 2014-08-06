@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Jupiter.jpg"]];
+    self.imageView = [[UIImageView alloc] initWithImage:self.spaceObject.spaceImage];
     self.scrView.contentSize = self.imageView.frame.size;
     [self.scrView addSubview:self.imageView];
     self.scrView.delegate = self;

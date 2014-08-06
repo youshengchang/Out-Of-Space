@@ -9,6 +9,7 @@
 #import "ITIOuterSpaceTableViewController.h"
 #import "AstronomicalData.h"
 #import "ITISpaceObject.h"
+#import "ITISpaceImageViewController.h"
 
 @interface ITIOuterSpaceTableViewController ()
 
@@ -82,6 +83,21 @@
     
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"%@", sender);
+    if([sender isKindOfClass:[UITableViewCell class]])
+    {
+        if([segue.destinationViewController isKindOfClass:[ITISpaceImageViewController class]])
+        {
+            ITISpaceImageViewController *nextViewController = segue.destinationViewController;
+            NSIndexPath *path = [self.tableView indexPathForCell:sender];
+            //ITISpaceObject *selectedObject = [self.planets objectAtIndex:path.row];
+            ITISpaceObject *selectedObject = self.planets[path.row];
+            nextViewController.spaceObject = selectedObject;
+        }
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
