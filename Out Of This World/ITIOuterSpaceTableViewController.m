@@ -10,6 +10,7 @@
 #import "AstronomicalData.h"
 #import "ITISpaceObject.h"
 #import "ITISpaceImageViewController.h"
+#import "ITISpaceDataViewController.h"
 
 @interface ITIOuterSpaceTableViewController ()
 
@@ -97,6 +98,14 @@
             nextViewController.spaceObject = selectedObject;
         }
     }
+    if([sender isKindOfClass:[NSIndexPath class]]){
+        if([segue.destinationViewController isKindOfClass:[ITISpaceDataViewController class]]){
+            ITISpaceDataViewController *targetViewController = segue.destinationViewController;
+            NSIndexPath *path = sender;
+            ITISpaceObject *selectedObject = self.planets[path.row];
+            targetViewController.spaceObject = selectedObject;
+        }
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -152,6 +161,12 @@
     return cell;
 }
 
+#pragma mark UITableView Delegate
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    //NSLog(@"accessory button is working properly %i", indexPath.row);
+    [self performSegueWithIdentifier:@"push to space data" sender:indexPath];
+}
 
 /*
 // Override to support conditional editing of the table view.
