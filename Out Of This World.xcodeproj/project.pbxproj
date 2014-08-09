@@ -35,6 +35,7 @@
 		8FC76AC119908BA0001E19F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8FC76ABF19908BA0001E19F9 /* InfoPlist.strings */; };
 		8FC76AC319908BA0001E19F9 /* Out_Of_This_WorldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC76AC219908BA0001E19F9 /* Out_Of_This_WorldTests.m */; };
 		8FC76AD119908F40001E19F9 /* ITIOuterSpaceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC76AD019908F40001E19F9 /* ITIOuterSpaceTableViewController.m */; };
+		8FEA7FB71995B4A500EC95CD /* ITIAddedSpaceObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEA7FB61995B4A500EC95CD /* ITIAddedSpaceObjectViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,8 @@
 		8FC76AC219908BA0001E19F9 /* Out_Of_This_WorldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Out_Of_This_WorldTests.m; sourceTree = "<group>"; };
 		8FC76ACF19908F40001E19F9 /* ITIOuterSpaceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITIOuterSpaceTableViewController.h; sourceTree = "<group>"; };
 		8FC76AD019908F40001E19F9 /* ITIOuterSpaceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITIOuterSpaceTableViewController.m; sourceTree = "<group>"; };
+		8FEA7FB51995B4A500EC95CD /* ITIAddedSpaceObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITIAddedSpaceObjectViewController.h; sourceTree = "<group>"; };
+		8FEA7FB61995B4A500EC95CD /* ITIAddedSpaceObjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITIAddedSpaceObjectViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 				8FC76AA619908BA0001E19F9 /* ITIAppDelegate.h */,
 				8FC76AA719908BA0001E19F9 /* ITIAppDelegate.m */,
 				8FC76AA919908BA0001E19F9 /* Main.storyboard */,
+				8FEA7FB51995B4A500EC95CD /* ITIAddedSpaceObjectViewController.h */,
+				8FEA7FB61995B4A500EC95CD /* ITIAddedSpaceObjectViewController.m */,
 				8F6A53FA19932ED80081B383 /* ITISpaceDataViewController.h */,
 				8F6A53FB19932ED80081B383 /* ITISpaceDataViewController.m */,
 				8F6A53701992D1E70081B383 /* ITISpaceImageViewController.h */,
@@ -310,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FEA7FB71995B4A500EC95CD /* ITIAddedSpaceObjectViewController.m in Sources */,
 				8FC76AA419908BA0001E19F9 /* main.m in Sources */,
 				8FC76AA819908BA0001E19F9 /* ITIAppDelegate.m in Sources */,
 				8F6A53721992D1E70081B383 /* ITISpaceImageViewController.m in Sources */,

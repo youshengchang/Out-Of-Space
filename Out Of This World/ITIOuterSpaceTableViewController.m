@@ -18,6 +18,27 @@
 
 @implementation ITIOuterSpaceTableViewController
 
+#pragma mark - Lazy instaniation of properties
+
+-(NSMutableArray *) planets
+{
+    if(!_planets){
+        _planets = [[NSMutableArray alloc]init];
+        
+    }
+    return _planets;
+    
+}
+
+-(NSMutableArray *)addedSpaceObjects
+{
+    if(!_addedSpaceObjects){
+        _addedSpaceObjects = [[NSMutableArray alloc]init];
+        
+    }
+    return _addedSpaceObjects;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -37,7 +58,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.planets = [[NSMutableArray alloc] init];
+    //self.planets = [[NSMutableArray alloc] init];
     
     for(NSMutableDictionary *planetData in [AstronomicalData allKnownPlanets]){
         NSString *imageName = [NSString stringWithFormat:@"%@.jpg", planetData[PLANET_NAME]];
@@ -94,7 +115,13 @@
             ITISpaceImageViewController *nextViewController = segue.destinationViewController;
             NSIndexPath *path = [self.tableView indexPathForCell:sender];
             //ITISpaceObject *selectedObject = [self.planets objectAtIndex:path.row];
-            ITISpaceObject *selectedObject = self.planets[path.row];
+            ITISpaceObject *selectedObject;
+            if(path.section == 0){
+                selectedObject = self.planets[path.row];
+            }else{
+                selectedObject = self.addedSpaceObjects[path.row];
+            }
+            
             nextViewController.spaceObject = selectedObject;
         }
     }
@@ -102,9 +129,18 @@
         if([segue.destinationViewController isKindOfClass:[ITISpaceDataViewController class]]){
             ITISpaceDataViewController *targetViewController = segue.destinationViewController;
             NSIndexPath *path = sender;
-            ITISpaceObject *selectedObject = self.planets[path.row];
+            ITISpaceObject *selectedObject;
+            if(path.section == 0){
+                selectedObject = self.planets[path.row];
+            }else{
+                selectedObject = self.addedSpaceObjects[path.row];
+            }
             targetViewController.spaceObject = selectedObject;
         }
+    }
+    if([segue.destinationViewController isKindOfClass:[ITIAddedSpaceObjectViewController class]]){
+        ITIAddedSpaceObjectViewController *addedSpaceObjectVC = segue.destinationViewController;
+        addedSpaceObjectVC.delegate = self;
     }
 }
 - (void)didReceiveMemoryWarning
@@ -113,24 +149,53 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - ITIAddedSpaceObjectViewControllerDelegate
+-(void)didCancel
+{
+    NSLog(@"didCancel");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)addSpaceObject:(ITISpaceObject *)newSpaceObject
+{
+ 
+    [self.addedSpaceObjects addObject:newSpaceObject];
+    NSLog(@"addSpaceObject");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tableView reloadData];
+
+}
+
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+
     // Return the number of sections.
-    return 1;
+    if([self.addedSpaceObjects count]){
+        return 2;
+    }else{
+        return 1;
+    }
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
     //if(section == 0)
     //    return 3;
     //else
     //    return 2;
-    return [self.planets count];
+    if(section == 1){
+        return [self.addedSpaceObjects count];
+    }else{
+         return [self.planets count];
+    }
+   
 }
 
 
@@ -149,10 +214,22 @@
         cell.backgroundColor = [UIColor blueColor];
     }
      */
-    ITISpaceObject *planet = [self.planets objectAtIndex:indexPath.row];
-    cell.textLabel.text = planet.name;
-    cell.detailTextLabel.text = planet.nickName;
-    cell.imageView.image = planet.spaceImage;
+    if(indexPath.section == 1){
+        //update the cell for the addedSpaceObjects
+        ITISpaceObject *newSpaceObject = [self.addedSpaceObjects objectAtIndex:indexPath.row];
+        cell.textLabel.text = newSpaceObject.name;
+        cell.detailTextLabel.text = newSpaceObject.nickName;
+        cell.imageView.image = newSpaceObject.spaceImage;
+        
+    }else{
+        //Access the ITISpaceObjects from planet array. Use the ITISpaceObject property to update the cell's property.
+        
+        ITISpaceObject *planet = [self.planets objectAtIndex:indexPath.row];
+        cell.textLabel.text = planet.name;
+        cell.detailTextLabel.text = planet.nickName;
+        cell.imageView.image = planet.spaceImage;
+
+    }
     
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
